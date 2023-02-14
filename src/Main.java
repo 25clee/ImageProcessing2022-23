@@ -81,6 +81,26 @@ public class Main extends PApplet {
             Panel lastPanel = panels.remove(panels.size()-1);
             panels.add(0, lastPanel);
             panels.add(firstPanel);
+            int lastPanelX = lastPanel.getX();
+            int lastPanelY = lastPanel.getY();
+            int firstPanelX = firstPanel.getX();
+            int firstPanelY = firstPanel.getY();
+            lastPanel.setX(firstPanelX);
+            lastPanel.setY(firstPanelY);
+            firstPanel.setX(lastPanelX);
+            firstPanel.setY(lastPanelY);
+        } else if (key == 'r') {
+            int i = (int)(Math.random()*panels.size());
+            Panel p = panels.remove(i);
+            Panel newP;
+            if (p instanceof ContrastedPanel){
+                newP = new CustomPanel(p.getX(), p.getY(), p.getWidth(), p.getHeight());
+
+            } else {
+                newP = new ContrastedPanel(p.getX(), p.getY(), p.getWidth(), p.getHeight());
+            }
+            panels.add(i, newP);
+            newP.setupImage("data/Hoho.png");
         }
     }
 }
